@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title th:text="${titulo}"></title>
+</head>
+
+<body>
+<h3 th:text ="${titulo}"></h3>
+<br>
+<br>
+
+<table>
+	<thead>
+		<tr>
+			<th>ID Tarjeta</th>
+			<th>Numero de tarjeta</th>
+			<th>icv</th>
+			<th>Tipo de tarjeta</th>  
+			<th>ID Cuenta</th>  
+		</tr>
+	</thead>
+	<tbody>
+	
+	 <p th:if = "${tarjetas.isEmpty()}">La lista de tarjetas esta vacia</p>
+		
+		<tr th:each="tarjeta: ${tarjetas}"></tr> <!--cuentas viene de CuentaController y cada registro se guarda en cuenta  -->
+		<tr th:each="tarjeta: ${tarjetas}">
+			<td th:text ="${tarjeta.getIdTarjeta()}"></td>
+			<td th:text ="${tarjeta.getNumeroTarjeta()}"></td>
+			<td th:text ="${tarjeta.getIcv()}"></td>
+		    <td th:text ="${tarjeta.getTipoTarjeta()}"></td> 
+		    <td th:text ="${tarjeta.getCuenta()}"></td> 
+		</tr>
+	</tbody>
+</table>
+</body>
+</html>

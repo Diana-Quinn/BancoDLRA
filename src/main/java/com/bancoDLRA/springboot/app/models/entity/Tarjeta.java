@@ -21,7 +21,7 @@ public class Tarjeta implements Serializable{
 
 	private static final long serialVersionUID = -1732362091652656124L;
 	
-	@Id
+	@Id()
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idTarjeta;
 	

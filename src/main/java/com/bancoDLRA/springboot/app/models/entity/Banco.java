@@ -17,13 +17,13 @@ public class Banco implements Serializable {
 	
 	private static final long serialVersionUID = -3806704469148550170L;
 	
-	@Column
-	@NotEmpty//para strings 
-	private String nombre;
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idBanco;
+	
+	@Column
+	@NotEmpty//para strings 
+	private String nombre;
 	
 	@Column
 	@NotEmpty//para strings 

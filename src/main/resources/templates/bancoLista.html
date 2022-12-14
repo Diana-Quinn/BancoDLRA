@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title th:text="${titulo}"></title>
+</head>
+
+<body>
+<h3 th:text ="${titulo}"></h3>
+<br>
+<br>
+
+<table>
+	<thead>
+		<tr>
+			<th>ID Banco</th>
+			<th>Nombre</th>
+			<th>Ubicacion</th>
+		</tr>
+	</thead>
+	<tbody>
+	
+	 <p th:if = "${bancos.isEmpty()}">La lista de bancos esta vacia</p>
+		
+		<tr th:each="banco: ${bancos}"></tr> <!--cuentas viene de CuentaController y cada registro se guarda en cuenta  -->
+		<tr th:each="banco: ${bancos}">
+			<td th:text ="${banco.getIdBanco()}"></td>
+			<td th:text ="${banco.getNombre()}"></td>
+			<td th:text ="${banco.getUbicacion()}"></td>
+		</tr>
+	</tbody>
+</table>
+</body>
+</html>

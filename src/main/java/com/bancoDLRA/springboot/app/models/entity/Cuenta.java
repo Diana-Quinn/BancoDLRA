@@ -77,4 +77,12 @@ public class Cuenta implements Serializable {
 		return serialVersionUID;
 	}
 
+	public Banco getBanco() {
+		return banco;
+	}
+
+	public void setBanco(Banco banco) {
+		this.banco = banco;
+	}
+
 }
