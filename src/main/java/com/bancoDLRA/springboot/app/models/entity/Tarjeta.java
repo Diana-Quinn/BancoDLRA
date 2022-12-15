@@ -33,7 +33,7 @@ public class Tarjeta implements Serializable{
 	@NotEmpty
 	private String icv;
 	
-	@Column(name = "tipo_tarjeta", nullable = false, length=3)
+	@Column(name = "tipo_tarjeta", nullable = false)
 	@NotEmpty
 	private String tipoTarjeta;
 	

@@ -23,12 +23,26 @@ public class TarjetaDaoImpl implements ITarjetaDao {
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public void save(Tarjeta tarjeta) {
 		if(tarjeta.getIdTarjeta() != null  &&  tarjeta.getIdTarjeta() > 0){//maximo 2 tarjetas?
 			em.merge(tarjeta);
 		}else{
 			em.persist(tarjeta);	
 		}
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public Tarjeta findOne(Long idTarjeta) {
+		return em.find(Tarjeta.class, idTarjeta);//objeto tarjeta, busca por id
+	}
+
+	@Override
+	public void delete(Long idTarjeta) {
+		em.remove(findOne(idTarjeta));
+		// TODO Auto-generated method stub
+		
 	}
 
 }

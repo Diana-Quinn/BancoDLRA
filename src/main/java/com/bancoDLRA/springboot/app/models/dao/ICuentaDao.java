@@ -9,4 +9,8 @@ public interface ICuentaDao { //interface contiene los metodos que se van a impl
 	public List<Cuenta> findAll();//metodo por default para traer todos los datos de la tabla
 	
 	public void save(Cuenta cuenta);//guardar de Cuenta una cuenta
+	
+	public Cuenta findOne(Long idCuenta);
+	
+	public void delete(Long idCuenta);
 }

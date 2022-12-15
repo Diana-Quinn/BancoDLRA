@@ -22,7 +22,7 @@
 	
 	 <p th:if = "${bancos.isEmpty()}">La lista de bancos esta vacia</p>
 		
-		<tr th:each="banco: ${bancos}"></tr> <!--cuentas viene de CuentaController y cada registro se guarda en cuenta  -->
+		<tr th:each="banco: ${bancos}"></tr> 
 		<tr th:each="banco: ${bancos}">
 			<td th:text ="${banco.getIdBanco()}"></td>
 			<td th:text ="${banco.getNombre()}"></td>

@@ -40,4 +40,17 @@ public class CuentaDaoImpl implements ICuentaDao {
 		
 	}
 
+	@Override
+	public Cuenta findOne(Long idCuenta) {
+		return em.find(Cuenta.class,idCuenta);
+	}
+
+	@Override
+	public void delete(Long idCuenta) {
+		em.remove(findOne(idCuenta));
+		
+	}
+
+	
+
 }
