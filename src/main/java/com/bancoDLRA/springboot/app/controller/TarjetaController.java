@@ -1,5 +1,6 @@
 package com.bancoDLRA.springboot.app.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.validation.Valid;
@@ -13,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.support.SessionStatus;
 
+import com.bancoDLRA.springboot.app.models.dao.ICuentaDao;
 import com.bancoDLRA.springboot.app.models.dao.ITarjetaDao;
+import com.bancoDLRA.springboot.app.models.entity.Cuenta;
 import com.bancoDLRA.springboot.app.models.entity.Tarjeta;
 
 
@@ -23,6 +26,9 @@ public class TarjetaController {
 	
 	@Autowired()
 	private ITarjetaDao tarjetaDao;
+	
+	//@Autowired()
+	//private ICuentaDao cuentaDao;
 	
 	@RequestMapping(value="/tarjetaLista", method = RequestMethod.GET)
 	public String tarjetaLista(Model model) {
@@ -34,6 +40,7 @@ public class TarjetaController {
 	@RequestMapping(value="/formulario-tarjeta")
 	public String crear(Map<String, Object> model) {
 		Tarjeta tarjeta = new Tarjeta();
+		//List<Cuenta> cuentaLista = cuentaDao.findAll();
 		model.put("tarjeta", tarjeta);
 		model.put("titulo", "Llenar los datos de la tarjeta");
 		return "formulario-tarjeta"; 

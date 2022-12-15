@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title th:text="${titulo}">Insert title here</title>
+<!--  <link href="../static/css/Layout.css" th:href="@{/css/Layout.css}" rel="stylesheet" />-->
+</head>
+
+<body>
+
+	<h3 th:text="${titulo}"></h3>
+	<br>
+	<p th:text="${mensaje}"></p>
+	<br>
+	
+	<tbody>
+	  <p th:if="${result}" th:text="${mensaje}"></p>
+	 
+	 <div> <!-- agregar atributos de etiqueta forms -->
+	 	<form th:action="@{/formulario-tarjeta}" th:object="${tarjeta}" method="post">
+	 		<table>
+				<tr>
+					<td>Numero de tarjeta(16 digitos)</td>
+					<td><input type="text" th:field="*{numeroTarjeta}"></td>
+				</tr>
+				
+				<tr>
+					<td>Numero de seguridad: ICV(3 Digitos)</td>
+					<td><input type="text" th:field="*{icv}"></td>
+				</tr>
+				
+				<tr>
+					<td>Tipo de tarjeta</td>
+					<td><input type="text" th:field="*{tipoTarjeta}"></td>
+				</tr>
+				
+				<tr>
+					<td>ID Cuenta</td>
+					<td>
+						<select th:field="*{cuenta}">
+							<option th:each="cuenta: ${tarjetaLista}"
+									th:value="${cuenta.getIdCuenta()}"
+									th:text="${cuenta.getIdCuenta()">
+							</option>
+						</select>
+					</td>
+				</tr>
+	 		</table>
+	 		
+	 			<br><input type="submit" value="Registrar tarjeta"/>
+	 	</form>
+	  </div>
+	 </tbody>
+	 <hr>
+	<a th: href="@{/tarjetaLista}">Regresar</a>
+</body>
+</html>
