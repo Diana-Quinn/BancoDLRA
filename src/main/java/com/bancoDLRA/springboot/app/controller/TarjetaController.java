@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -23,6 +24,7 @@ import com.bancoDLRA.springboot.app.models.dao.ICuentaDao;
 import com.bancoDLRA.springboot.app.models.dao.ITarjetaDao;
 import com.bancoDLRA.springboot.app.models.entity.Cuenta;
 import com.bancoDLRA.springboot.app.models.entity.Tarjeta;
+import com.bancoDLRA.springboot.app.validator.TarjetaValidator;
 
 
 
@@ -43,6 +45,14 @@ public class TarjetaController {
 	public void InitBinder(WebDataBinder binder) {
 		binder.registerCustomEditor(Cuenta.class, "cuenta", cuentaEditor);
 	}
+	
+	@Autowired()
+	private TarjetaValidator tarjetaValidator;
+	
+	/*
+	public void initBinder(WebDataBinder binder) {//WebDataBinder para hacer la validacion
+		binder.addValidators(tarjetaValidator);
+	}*/
 	
 	@RequestMapping(value="/tarjetaLista", method = RequestMethod.GET)
 	public String tarjetaLista(Model model) {
@@ -82,6 +92,8 @@ public class TarjetaController {
 	@RequestMapping(value="/formulario-tarjeta", method = RequestMethod.POST)
 	public String guardar(@Valid Tarjeta tarjeta, BindingResult result, Model model, 
 			SessionStatus status, RedirectAttributes flash) {
+		
+		tarjetaValidator.validate(tarjeta, result);
 		
 		if(result.hasErrors()) {
 			model.addAttribute("titulo", "Llene correctamente los datos");

@@ -2,6 +2,7 @@ package com.bancoDLRA.springboot.app.models.entity;
 
 import java.io.Serializable;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -35,7 +36,7 @@ public class Tarjeta implements Serializable{
 	
 	//Llave foranea //muchas tarjetas pertenecen a una cuenta
 	@JoinColumn(name ="cuenta", referencedColumnName="idCuenta", nullable=false)
-	@ManyToOne(optional=false, fetch = FetchType.LAZY)//multiplicidad //lazy no consume muchos recursos 
+	@ManyToOne(optional=false, fetch = FetchType.LAZY, cascade=CascadeType.MERGE)//multiplicidad //lazy no consume muchos recursos 
 	private Cuenta cuenta;
 
 	

@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.bancoDLRA.springboot.app.models.dao.IBancoDao;
 import com.bancoDLRA.springboot.app.models.entity.Banco;
+import com.bancoDLRA.springboot.app.validator.BancoValidator;
 
 @Controller
 @SessionAttributes("banco")
@@ -24,6 +27,17 @@ public class BancoController {
 	
 	@Autowired()//para que se reconozca el archivo ICuentaDaoImp
 	private IBancoDao bancoDao;//Declaramos la inferfaz
+	
+	
+	@Autowired()//IMPORTANTE porque vamos a usar la implementacion
+	private BancoValidator bancoValidator;//validaciones messages*/
+	
+	
+	//validaciones implicitas
+	@InitBinder//toma en cuenta vistas html?
+	public void initBinder(WebDataBinder binder) {//WebDataBinder para hacer la validacion
+		binder.addValidators(bancoValidator);
+	}
 
 	
 	@RequestMapping(value="/bancoLista", method = RequestMethod.GET)//para enviar los datos a la vista
@@ -60,6 +74,8 @@ public class BancoController {
 	@RequestMapping(value="/formulario-banco", method = RequestMethod.POST)
 	public String guardar(@Valid Banco banco, BindingResult result, Model model, 
 			SessionStatus status, RedirectAttributes flash) {
+		
+		//bancoValidator.validate(banco, result);//Importante, usamos la implementacion
 		
 		if(result.hasErrors()) {
 			model.addAttribute("titulo", "Llene correctamente los datos");

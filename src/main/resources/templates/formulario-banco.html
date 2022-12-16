@@ -21,11 +21,13 @@
 				<tr>
 					<td>Nombre</td>
 					<td><input type="text" th:field="*{nombre}" required></td>
+					<div th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
 				</tr>
 				
 				<tr>
 					<td>Ubicacion</td>
 					<td><input type="text" th:field="*{ubicacion}" required></td>
+					<div th:if="${#fields.hasErrors('ubicacion')}" th:errors="*{ubicacion}"></div>
 				</tr>
 				
 	 		</table>

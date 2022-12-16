@@ -1,11 +1,14 @@
 package com.bancoDLRA.springboot.app.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -44,7 +47,18 @@ public class CuentaController {
 	}
 	
 	@Autowired
-	private CuentaValidator cuentaValidator;
+	private CuentaValidator cuentaValidator;//validaciones messages
+	
+	//validaciones implicitas
+	@InitBinder//toma en cuenta vistas html?
+	public void initBinder(WebDataBinder binder) {//WebDataBinder para hacer la validacion
+		binder.addValidators(cuentaValidator);
+	
+	//validacion de fecha
+	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	dateFormat.setLenient(false);//valida formato correcto
+	binder.registerCustomEditor(Date.class, "diaCreacion", new CustomDateEditor(dateFormat,false));
+	}
 
 	
 	@RequestMapping(value="/cuentaLista", method = RequestMethod.GET)//para enviar los datos a la vista
@@ -88,7 +102,8 @@ public class CuentaController {
 	public String guardar(@Valid Cuenta cuenta, BindingResult result, Model model, 
 			SessionStatus status, RedirectAttributes flash) {
 		
-		cuentaValidator.validate(cuenta, result);
+		//validacion de forma explicita
+		//cuentaValidator.validate(cuenta, result);
 		
 		if(result.hasErrors()) {
 			model.addAttribute("titulo", "Llene correctamente los datos");
@@ -115,13 +130,23 @@ public class CuentaController {
 	@RequestMapping(value="/eliminarCuenta/{idCuenta}")
 	public String eliminar(@PathVariable(value="idCuenta") Long idCuenta){
 		
+		/*
+		//para validar --TODO
+		try {
+		if(idCuenta!=null && idCuenta>0) {
+				cuentaDao.delete(idCuenta);
+			}else {System.out.println("bien");}
+			
+		}catch (Exception e) {
+				System.out.println("Elimina primero la tarjeta");
+	}
+	return "cuentaLista";*/
+		
 		if(idCuenta!=null && idCuenta>0) {
 			cuentaDao.delete(idCuenta);
 		}
 		return "redirect:/cuentaLista";
 	}
 	
-	
-	
-	
-}
+	}
+

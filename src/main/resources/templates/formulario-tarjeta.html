@@ -21,16 +21,19 @@
 				<tr>
 					<td>Numero de tarjeta(16 digitos)</td>
 					<td><input type="text" th:field="*{numeroTarjeta}" required></td>
+					<div th:if="${#fields.hasErrors('numeroTarjeta')}" th:errors="*{numeroTarjeta}"></div>
 				</tr>
 				
 				<tr>
 					<td>Numero de seguridad: ICV(3 Digitos)</td>
 					<td><input type="text" th:field="*{icv}" required></td>
+					<div th:if="${#fields.hasErrors('icv')}" th:errors="*{icv}"></div>
 				</tr>
 				
 				<tr>
 					<td>Tipo de tarjeta</td>
-					<td><input type="text" th:field="*{tipoTarjeta}" required></td>
+					<td><input type="text" th:field="*{tipoTarjeta}" placeholder="fisica o digital" required></td>
+					<div th:if="${#fields.hasErrors('tipoTarjeta')}" th:errors="*{tipoTarjeta}"></div>
 				</tr>
 				
 				<tr>
