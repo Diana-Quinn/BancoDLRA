@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title th:text="${titulo}">Insert title here</title>
+<!--  <link href="../static/css/Layout.css" th: href="@{/css/Layout.css}" rel="stylesheet" />-->
+</head>
+
+<body>
+	<h3 th:text="${titulo}"></h3>
+	<br>
+	<p th:text="${mensaje}"></p>
+	<br>
+	
+	<tbody>
+	<p th:if="${result}" th:text="${mensaje}"></p>
+	 
+	 <div> <!-- agregar atributos de etiqueta forms -->
+	 	<form th:action="@{/formulario-cuenta}" th:object="${cuenta}" method="post">
+	 		<table>
+				<tr>
+					<td>Saldo actual</td>
+					<td><input type="text" th:field="*{saldoActual}"></td>
+				</tr>
+				
+				<tr>
+					<td>Dia de creacion (yyyy-MM-dd)</td>
+					<td><input type="text" th:field="*{diaCreacion}"></td>
+				</tr>
+				
+				<tr>
+					<td>ID Banco</td>
+					<td>
+						<select th:field="*{banco}">
+							<option th:each="banco: ${bancoLista}"
+									th:value="${banco.getIdBanco()}"
+									th:text="${banco.getIdBanco()+ ' Nombre: ' + banco.getNombre()}">
+							</option>
+						</select>
+					</td>
+				</tr>
+	 		</table>
+	 		
+	 			<br><input type="submit" value="Registrar cuenta"/>
+	 	</form>
+	  </div>
+	</tbody>
+	<hr>
+	<a th:href="@{/cuentaLista}">Regresar</a>
+	
+</body>
+</html>
