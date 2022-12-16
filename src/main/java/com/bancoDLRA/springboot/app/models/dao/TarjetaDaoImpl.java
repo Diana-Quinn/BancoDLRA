@@ -23,7 +23,7 @@ public class TarjetaDaoImpl implements ITarjetaDao {
 	}
 
 	@Override
-	@Transactional(readOnly = true)
+	@Transactional
 	public void save(Tarjeta tarjeta) {
 		if(tarjeta.getIdTarjeta() != null  &&  tarjeta.getIdTarjeta() > 0){//maximo 2 tarjetas?
 			em.merge(tarjeta);
@@ -39,6 +39,7 @@ public class TarjetaDaoImpl implements ITarjetaDao {
 	}
 
 	@Override
+	@Transactional
 	public void delete(Long idTarjeta) {
 		em.remove(findOne(idTarjeta));
 		// TODO Auto-generated method stub

@@ -2,8 +2,6 @@ package com.bancoDLRA.springboot.app.models.entity;
 
 import java.io.Serializable;
 
-import javax.validation.constraints.NotEmpty;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -26,15 +24,12 @@ public class Tarjeta implements Serializable{
 	private Long idTarjeta;
 	
 	@Column(name = "numero_tarjeta", nullable =false, length=16)
-	@NotEmpty
 	private String numeroTarjeta;
 	
 	@Column(name = "icv", nullable = false, length=3)
-	@NotEmpty
 	private String icv;
 	
 	@Column(name = "tipo_tarjeta", nullable = false)
-	@NotEmpty
 	private String tipoTarjeta;
 	
 	

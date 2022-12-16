@@ -11,12 +11,15 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.bancoDLRA.springboot.app.models.dao.IBancoDao;
 import com.bancoDLRA.springboot.app.models.entity.Banco;
 
 @Controller
+@SessionAttributes("banco")
 public class BancoController {
 	
 	@Autowired()//para que se reconozca el archivo ICuentaDaoImp
@@ -24,7 +27,7 @@ public class BancoController {
 
 	
 	@RequestMapping(value="/bancoLista", method = RequestMethod.GET)//para enviar los datos a la vista
-	public String cuentaLista(Model model) {
+	public String bancoLista(Model model) {
 		model.addAttribute("titulo", "Lista de bancos");
 		model.addAttribute("bancos", bancoDao.findAll());
 		return "bancoLista"; 
@@ -44,39 +47,49 @@ public class BancoController {
 		
 		Banco banco = null;
 		
-		if(idBanco>0) {
+		if(idBanco!=null && idBanco>0) {
 			banco = bancoDao.findOne(idBanco);
 		}else {
-			return "redirect:/index";
+			return "index";
 		}
 		model.put("banco", banco);
 		model.put("titulo", "Editar banco");
-		
 		return "formulario-banco";
 	}
 	
 	@RequestMapping(value="/formulario-banco", method = RequestMethod.POST)
-	public String guardar(@Valid Banco banco, BindingResult result, Model model, SessionStatus status) {
+	public String guardar(@Valid Banco banco, BindingResult result, Model model, 
+			SessionStatus status, RedirectAttributes flash) {
 		
 		if(result.hasErrors()) {
-			model.addAttribute("titulo", "Formulario del Banco");
-			return "formulario-banco";
+			model.addAttribute("titulo", "Llene correctamente los datos");
+			model.addAttribute("result", result.hasErrors());
+			model.addAttribute("mensaje", "Error al enviar los datos, favor de escribir la informacion correctamente");
+			return "formulario-tarjeta";
+		}else {
+			model.addAttribute("result", false);
 		}
-		bancoDao.save(banco);
-		status.setComplete();
 		
-		return "redirect:index";
+		model.addAttribute("titulo", "Formulario del banco");
+		model.addAttribute("mensaje", "Se envió la informacion correctamente");
+		try{
+			bancoDao.save(banco);
+		}catch (Exception e){//exception personalizada
+			e.printStackTrace();
+			flash.addFlashAttribute("mensaje", e.getMessage());
+		}
+		status.setComplete();//al recargar se limpian los campos
+		
+		return "redirect:formulario-banco";
 	}
 	
 	@RequestMapping(value="/eliminarBanco/{idBanco}")
-	public String eliminar(@PathVariable(value="idBanco") 
-	Long idBanco){
+	public String eliminar(@PathVariable(value="idBanco") Long idBanco){
 		
-		if(idBanco>0) {
+		if(idBanco!=null && idBanco>0) {
 			bancoDao.delete(idBanco);
 		}
-		return "redirect:index";
-	}
+		return "redirect:/bancoLista";
 
-
+}
 }

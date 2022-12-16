@@ -28,8 +28,12 @@
 			<td th:text ="${banco.getIdBanco()}"></td>
 			<td th:text ="${banco.getNombre()}"></td>
 			<td th:text ="${banco.getUbicacion()}"></td>
+			<td><a th:href="@{/formulario-banco/} + ${banco.getIdBanco()}" th:text="'Editar'"></a></td>
+		  	<td><a th:href="@{/eliminarBanco/} + ${banco.getIdBanco()}" th:text="'Eliminar'" 
+		  	onclick="return confirm('¿Desea eliminar el Banco?');"></a></td>
 		</tr>
 	</tbody>
 </table>
+<a th:href="@{/index}">Inicio</a> <!-- checar despues -->
 </body>
 </html>

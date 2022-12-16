@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -22,8 +23,10 @@ import com.bancoDLRA.springboot.app.models.dao.IBancoDao;
 import com.bancoDLRA.springboot.app.models.dao.ICuentaDao;
 import com.bancoDLRA.springboot.app.models.entity.Banco;
 import com.bancoDLRA.springboot.app.models.entity.Cuenta;
+import com.bancoDLRA.springboot.app.validator.CuentaValidator;
 
 @Controller
+@SessionAttributes("cuenta")
 public class CuentaController {
 	
 	@Autowired()//para que se reconozca el archivo ICuentaDaoImp
@@ -39,6 +42,9 @@ public class CuentaController {
 	public void InitBinder(WebDataBinder binder) {
 		binder.registerCustomEditor(Banco.class, "banco", bancoEditor);
 	}
+	
+	@Autowired
+	private CuentaValidator cuentaValidator;
 
 	
 	@RequestMapping(value="/cuentaLista", method = RequestMethod.GET)//para enviar los datos a la vista
@@ -82,6 +88,8 @@ public class CuentaController {
 	public String guardar(@Valid Cuenta cuenta, BindingResult result, Model model, 
 			SessionStatus status, RedirectAttributes flash) {
 		
+		cuentaValidator.validate(cuenta, result);
+		
 		if(result.hasErrors()) {
 			model.addAttribute("titulo", "Llene correctamente los datos");
 			model.addAttribute("result", result.hasErrors());
@@ -101,16 +109,16 @@ public class CuentaController {
 		}
 		status.setComplete();//al recargar se limpian los campos
 		
-		return "redirect:formulario-cuenta";
+		return "redirect:/formulario-cuenta";
 	}
 	
 	@RequestMapping(value="/eliminarCuenta/{idCuenta}")
 	public String eliminar(@PathVariable(value="idCuenta") Long idCuenta){
 		
-		if(idCuenta>0) {
+		if(idCuenta!=null && idCuenta>0) {
 			cuentaDao.delete(idCuenta);
 		}
-		return "redirect:index";
+		return "redirect:/cuentaLista";
 	}
 	
 	

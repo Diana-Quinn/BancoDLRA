@@ -23,7 +23,7 @@ public class BancoDaoImpl implements IBancoDao {
 	}
 
 	@Override
-	@Transactional(readOnly = true)
+	@Transactional
 	public void save(Banco banco) {
 		if(banco.getIdBanco() != null && banco.getIdBanco() > 0){
 			em.merge(banco);
@@ -39,6 +39,7 @@ public class BancoDaoImpl implements IBancoDao {
 	}
 
 	@Override
+	@Transactional
 	public void delete(Long idBanco) {
 		em.remove(findOne(idBanco));
 	}

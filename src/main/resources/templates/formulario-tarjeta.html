@@ -20,17 +20,17 @@
 	 		<table>
 				<tr>
 					<td>Numero de tarjeta(16 digitos)</td>
-					<td><input type="text" th:field="*{numeroTarjeta}"></td>
+					<td><input type="text" th:field="*{numeroTarjeta}" required></td>
 				</tr>
 				
 				<tr>
 					<td>Numero de seguridad: ICV(3 Digitos)</td>
-					<td><input type="text" th:field="*{icv}"></td>
+					<td><input type="text" th:field="*{icv}" required></td>
 				</tr>
 				
 				<tr>
 					<td>Tipo de tarjeta</td>
-					<td><input type="text" th:field="*{tipoTarjeta}"></td>
+					<td><input type="text" th:field="*{tipoTarjeta}" required></td>
 				</tr>
 				
 				<tr>

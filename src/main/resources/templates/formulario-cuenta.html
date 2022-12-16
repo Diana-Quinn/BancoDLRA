@@ -9,7 +9,7 @@
 <body>
 	<h3 th:text="${titulo}"></h3>
 	<br>
-	<p th:text="${mensaje}"></p>
+	<!--  <p th:text="${mensaje}"></p>-->
 	<br>
 	
 	<tbody>
@@ -20,12 +20,14 @@
 	 		<table>
 				<tr>
 					<td>Saldo actual</td>
-					<td><input type="text" th:field="*{saldoActual}"></td>
+					<td><input type="text" th:field="*{saldoActual}" required></td>
+					<div th:if="${#fields.hasErrors('saldoActual')}" th:errors="*{saldoActual}"></div>
 				</tr>
 				
 				<tr>
 					<td>Dia de creacion (yyyy-MM-dd)</td>
-					<td><input type="text" th:field="*{diaCreacion}"></td>
+					<td><input type="text" th:field="*{diaCreacion}" required></td>
+					<div th:if="${#fields.hasErrors('diaCreacion')}" th:errors="*{diaCreacion}"></div>
 				</tr>
 				
 				<tr>

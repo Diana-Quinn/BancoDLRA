@@ -108,10 +108,10 @@ public class TarjetaController {
 	@RequestMapping(value="/eliminarTarjeta/{idTarjeta}")
 	public String eliminar(@PathVariable(value="idTarjeta") Long idTarjeta){
 		
-		if(idTarjeta>0) {
+		if(idTarjeta!=null && idTarjeta>0) {
 			tarjetaDao.delete(idTarjeta);
 		}
-		return "redirect:index";
+		return "redirect:/tarjetaLista";
 	}
 
 	

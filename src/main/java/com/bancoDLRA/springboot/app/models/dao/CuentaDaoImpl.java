@@ -41,11 +41,13 @@ public class CuentaDaoImpl implements ICuentaDao {
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public Cuenta findOne(Long idCuenta) {
 		return em.find(Cuenta.class,idCuenta);
 	}
 
 	@Override
+	@Transactional
 	public void delete(Long idCuenta) {
 		em.remove(findOne(idCuenta));
 		

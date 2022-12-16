@@ -2,8 +2,6 @@ package com.bancoDLRA.springboot.app.models.entity;
 
 import java.io.Serializable;
 
-import javax.validation.constraints.NotEmpty;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -22,11 +20,9 @@ public class Banco implements Serializable {
 	private Long idBanco;
 	
 	@Column
-	@NotEmpty//para strings 
 	private String nombre;
 	
 	@Column
-	@NotEmpty//para strings 
 	private String ubicacion;
 
 	

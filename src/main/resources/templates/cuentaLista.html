@@ -17,7 +17,7 @@
 			<th>ID Cuenta</th>
 			<th>Saldo actual</th>
 			<th>Dia de creacion</th>
-			<!-- <th>ID Banco</th>   -->
+			<th>ID Banco</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -29,7 +29,10 @@
 			<td th:text ="${cuenta.getIdCuenta()}"></td>
 			<td th:text ="${cuenta.getSaldoActual()}"></td>
 			<td th:text ="${cuenta.getDiaCreacion()}"></td>
-		   <!--   <td th:text ="${cuenta.getBanco()}"></td> -->
+		    <td th:text ="${cuenta.getBanco().getIdBanco()+ ' Nombre:' + cuenta.getBanco().getNombre()} "></td>
+		    <td><a th:href="@{/formulario-cuenta/} + ${cuenta.getIdCuenta()}" th:text="'Editar'"></a></td>
+		  	<td><a th:href="@{/eliminarCuenta/} + ${cuenta.getIdCuenta()}" th:text="'Eliminar'" 
+		  	onclick="return confirm('¿Desea eliminar la cuenta?');"></a></td>
 		</tr>
 	</tbody>
 </table>
