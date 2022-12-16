@@ -55,7 +55,7 @@ public class TarjetaController {
 		if(idTarjeta>0) {
 			tarjeta = tarjetaDao.findOne(idTarjeta);
 		}else {
-			return "redirect:/index";
+			return "redirect:/tarjetaLista";
 		}
 		model.put("tarjeta", tarjeta);
 		model.put("titulo", "Editar tarjeta");

@@ -3,18 +3,17 @@
 <head>
 <meta charset="UTF-8" />
 <title th:text="${titulo}">Insert title here</title>
-<!--  <link href="../static/css/Layout.css" th:href="@{/css/Layout.css}" rel="stylesheet" />-->
+<!--  <link href="../static/css/Layout.css" th: href="@{/css/Layout.css}" rel="stylesheet" />-->
 </head>
 
 <body>
-
 	<h3 th:text="${titulo}"></h3>
 	<br>
 	<p th:text="${mensaje}"></p>
 	<br>
 	
 	<tbody>
-	  <p th:if="${result}" th:text="${mensaje}"></p>
+	<p th:if="${result}" th:text="${mensaje}"></p>
 	 
 	 <div> <!-- agregar atributos de etiqueta forms -->
 	 	<form th:action="@{/formulario-tarjeta}" th:object="${tarjeta}" method="post">
@@ -50,8 +49,9 @@
 	 			<br><input type="submit" value="Registrar tarjeta"/>
 	 	</form>
 	  </div>
-	 </tbody>
-	 <hr>
-	<a th: href="@{/tarjetaLista}">Regresar</a>
+	</tbody>
+	<hr>
+	<a th:href="@{/tarjetaLista}">Regresar</a>
+	
 </body>
 </html>
