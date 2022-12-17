@@ -96,7 +96,7 @@ public class BancoController {
 		}
 		status.setComplete();//al recargar se limpian los campos
 		
-		return "redirect:formulario-banco";
+		return "redirect:/formulario-banco";
 	}
 	
 	@RequestMapping(value="/eliminarBanco/{idBanco}")

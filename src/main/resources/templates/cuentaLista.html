@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <title th:text="${titulo}"></title>
+<link href="../static/css/Layout.css" th:href="@{/css/Layout.css}" rel="stylesheet"/>
 </head>
-
 <body>
 <h3 th:text ="${titulo}"></h3>
 <br>
@@ -36,5 +36,7 @@
 		</tr>
 	</tbody>
 </table>
+<br>
+<a th:href="@{/}">Inicio</a>
 </body>
 </html>

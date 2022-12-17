@@ -2,7 +2,6 @@ package com.bancoDLRA.springboot.app.validator;
 
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
-import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 import com.bancoDLRA.springboot.app.models.entity.Banco;
@@ -19,14 +18,11 @@ public class BancoValidator implements Validator {
 	public void validate(Object target, Errors errors) {
 		Banco banco =(Banco)target;
 		
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "nombre", "NotNull.banco.nombre");
-		
+		//ValidationUtils.rejectIfEmptyOrWhitespace(errors, "nombre", "NotNull.banco.nombre");
+		/* checar despues para permitir solo texto
 		if(!banco.getNombre().matches("[a-z,A-Z]{1,15}?[ ]?[a-z,A-Z]{1,15}")) {
 			errors.rejectValue("nombre", "format.banco.nombre");
-		}
-
-		
-		// TODO Auto-generated method stub
+		}*/
 
 	}
 

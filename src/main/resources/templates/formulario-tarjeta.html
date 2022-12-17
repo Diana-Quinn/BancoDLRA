@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <title th:text="${titulo}">Insert title here</title>
-<!--  <link href="../static/css/Layout.css" th: href="@{/css/Layout.css}" rel="stylesheet" />-->
+<link href="../static/css/Layout.css" th:href="@{/css/Layout.css}" rel="stylesheet"/>
 </head>
 
 <body>
@@ -32,7 +32,17 @@
 				
 				<tr>
 					<td>Tipo de tarjeta</td>
-					<td><input type="text" th:field="*{tipoTarjeta}" placeholder="fisica o digital" required></td>
+					<td>
+						<select th:field="*{tipoTarjeta}">
+							<option 
+									th:value="'Digital'"
+									th:text="'Digital'">
+							</option>
+							<option th:value="'Fisica'"
+									th:text="Fisica">
+							</option>
+						</select>
+					</td>
 					<div th:if="${#fields.hasErrors('tipoTarjeta')}" th:errors="*{tipoTarjeta}"></div>
 				</tr>
 				

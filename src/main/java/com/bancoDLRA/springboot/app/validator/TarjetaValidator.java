@@ -2,7 +2,6 @@ package com.bancoDLRA.springboot.app.validator;
 
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
-import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 import com.bancoDLRA.springboot.app.models.entity.Tarjeta;
@@ -19,7 +18,7 @@ public class TarjetaValidator implements Validator {
 	public void validate(Object target, Errors errors) {
 		Tarjeta tarjeta =  (Tarjeta)target;
 		
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "nombre", "NotNull.tarjeta.tipoTarjeta");
+		//ValidationUtils.rejectIfEmptyOrWhitespace(errors, "tipoTarjeta", "NotNull.tarjeta.tipoTarjeta");
 		
 		if(!tarjeta.getTipoTarjeta().matches("[a-z,A-Z]{1,15}")) {
 			errors.rejectValue("tipoTarjeta", "format.tarjeta.tipoTarjeta");

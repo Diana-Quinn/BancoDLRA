@@ -1,0 +1,40 @@
+body{
+	font: 80% sans-serif;
+	width: 700px;
+    max-width: 800px;
+    padding: 40px;
+    margin: 0 auto; /*auto para centrar*/
+    background: rgb(177, 177, 177);
+    box-shadow: 0px 0px 10px rgb(150, 150, 150); 
+}
+
+a{
+	background-color: #FF7F7F;
+	border: none;
+	color: white;
+	padding: 5px 10px;
+	text-align:center;
+	text-decoration:none;
+	display:inline-block;
+	font-size: 12px;
+	margin-bottom:12px;
+}
+
+h1,h3{
+	background: #E52454;
+	width: absolute;
+	margin:auto;
+	border: 2px solid #FF053F;
+	text-align:center;
+}
+
+tr{
+	background:#DE6047;
+	padding: 10px;
+	
+}
+
+td{
+	background:#F57564;
+	padding:10;
+}
